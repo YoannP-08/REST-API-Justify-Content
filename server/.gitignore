@@ -1,0 +1,9 @@
+# dependencies
+nodes_modules
+package-lock.json
+
+# Environment variables
+.env
+
+#misc
+.DS_Store
