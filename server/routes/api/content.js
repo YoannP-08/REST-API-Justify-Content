@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const auth = require('../../middleware/authentication');
 
 // Import Content Model
 const Content = require('../../models/Content');
@@ -10,16 +11,18 @@ const Content = require('../../models/Content');
 // @description: Return a content in plain/text && justified
 //               to 80 characters max
 // @access Private
-router.post('/', async (req, res) => {
-    // Destructure object new Content
+router.post('/', auth, async (req, res) => {
+    // Destructuring object new Content
     const { text, userId } = req.body;
 
-    // Simple Field Validation
+    // const text = req.body; // another method to handle post with text/plain req.body
+
+    // Validating field
     if (!text) {
         return res.status(400).json({ success: false, msg: 'Text field cannot be empty!' });
     };
 
-    // Checking
+    // Checking if userId is provided
     if (!userId) {
         return res.status(400).json({ success: false, msg: 'User Id missing.'})
     };
