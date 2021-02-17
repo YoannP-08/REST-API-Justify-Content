@@ -9,7 +9,8 @@ const db = process.env.MONGO_URI;
 // Initialise express server
 const app = express();
 
-app.use(express.json());
+// Adding express.text() to support text/plain content-type
+app.use(express.json(), express.text());
 
 // Connect DB
 // Adding new mongo DB url parser

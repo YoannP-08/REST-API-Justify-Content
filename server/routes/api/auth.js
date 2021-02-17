@@ -12,7 +12,7 @@ const User = require('../../models/User');
 // @description: Register New User (Sign-Up)
 // @access Public
 router.post('/signup', async (req, res) => {
-    // Destructure object new user
+    // Destructuring object new user
     const { email, password } = req.body;
     
     // Simple Fields Validation
@@ -76,10 +76,10 @@ router.post('/signup', async (req, res) => {
 // @description: Login user (Sign-In)
 // @access Public
 router.post('/signin', async (req, res) => {
-    // Destructure object user Login Details
+    // Destructuring object user Login Details
     const { email, password } = req.body;
 
-    // Simple fields Validation
+    // Validating fields
     if (!email || !password) {
         return res.status(400).json({ success: false, msg: 'Please enter all fields.' });
     };
