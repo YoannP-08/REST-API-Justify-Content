@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/User');
 
 // POST Create New User
-// @route post localhost:5000/api/auth/signup
+// @route post http://localhost:5000/api/auth/signup
 // @description: Register New User (Sign-Up)
 // @access Public
 router.post('/signup', async (req, res) => {
@@ -72,7 +72,7 @@ router.post('/signup', async (req, res) => {
 });
 
 // POST Login an existing User
-// @route post localhost:5000/api/auth/signin
+// @route post http://localhost:5000/api/auth/signin
 // @description: Login user (Sign-In)
 // @access Public
 router.post('/signin', async (req, res) => {
