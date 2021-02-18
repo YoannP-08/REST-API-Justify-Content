@@ -13,32 +13,32 @@ const Content = require('../../models/Content');
 // @access Private
 router.post('/', auth, async (req, res) => {
     // Destructuring object new Content
-    const { text, userId } = req.body;
+    // method to handle post with json req.body
+    // const { text, userId } = req.body;
 
-    // const text = req.body; // another method to handle post with text/plain req.body
+    const text = req.body; // method to handle post with text/plain req.body
 
     // Validating field
     if (!text) {
         return res.status(400).json({ success: false, msg: 'Text field cannot be empty!' });
     };
 
-    // Checking if userId is provided
-    if (!userId) {
-        return res.status(400).json({ success: false, msg: 'User Id missing.'})
-    };
+    // // Checking if userId is provided
+    // if (!userId) {
+    //     return res.status(400).json({ success: false, msg: 'User Id missing.'})
+    // };
 
     try {
         const newContent = new Content({
             text, 
-            userId
+            // userId
         });
 
         const savedContent = await newContent.save();
 
         if (!savedContent) throw Error('Something went wrong while saving the content.');
-        res.set('Content-Type', 'text/plain')
-        res.status(200)
-        res.send(text)
+
+        res.set('Content-Type', 'text/plain').status(200).send(text)
 
     } catch (err) {
         return res.status(400).json({ success: false, msg: err});
