@@ -1,13 +1,8 @@
-// @middleware: create an authenticated middleware to
-//              protect selected routes and ensure user
-//              is authenticated with a token to go through
-//              its requests.  
-
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
 
 function authentication(req, res, next) {
-    const token = req.header('token');
+    const token = req.headers.authorization.split(" ")[1];
 
     // Checking token
     if (!token) {
