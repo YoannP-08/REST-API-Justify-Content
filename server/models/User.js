@@ -14,6 +14,10 @@ const UserSchema = new Schema({
         min: 6,
         max: 1000
     },
+    counter: {
+        type: Number,
+        default: 0,
+    }
 }, {
     timestamps: true
 })

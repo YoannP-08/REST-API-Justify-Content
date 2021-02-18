@@ -62,7 +62,8 @@ router.post('/signup', async (req, res) => {
             user: {
                 id: savedUser.id,
                 email: savedUser.email,
-                password: hashPwd
+                password: hashPwd,
+                counter: savedUser.counter
             }
         });
 
@@ -85,7 +86,7 @@ router.post('/signin', async (req, res) => {
     };
 
     // Checking if User exists
-    const user = await User.findOne({ email: email});
+    const user = await User.findOne({ email: email });
 
     if (!user) {
         return res.status(400).json({ success: false, msg: `User with email: ${email} does not exist.` });
@@ -112,7 +113,8 @@ router.post('/signin', async (req, res) => {
                 token,
                 user: {
                     id: user.id,
-                    email: user.email
+                    email: user.email,
+                    counter: user.counter
                 }
             });
         };
