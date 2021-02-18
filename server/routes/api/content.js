@@ -41,8 +41,8 @@ router.post('/', auth, async (req, res) => {
 
     if (80000 < user.counter) {
         return res.status(402).json({ success: false, msg: 'Payment Required.'});
-    } else if (200 < newCount) {
-        return res.status(402).json({ sucess: false, msg: `No sufficient free credits, free credits left ${200 - user.counter}. Current request is of ${nbrWords}`});
+    } else if (80000 < newCount) {
+        return res.status(402).json({ sucess: false, msg: `No sufficient free credits, free credits left ${80000 - user.counter}. Current request is of ${nbrWords}`});
     };
 
     await User.findByIdAndUpdate({ _id: tokenDecoded.id }, { counter: newCount }, { new: true, useFindAndModify: false });
