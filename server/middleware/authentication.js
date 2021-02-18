@@ -11,7 +11,7 @@ function authentication(req, res, next) {
 
     // Checking token
     if (!token) {
-        res.status(401).json({ msg: 'No token, unauthorized.'});
+        return res.status(401).json({ msg: 'No token, unauthorized.'});
     };
 
     try {
