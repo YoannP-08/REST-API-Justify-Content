@@ -24,6 +24,10 @@ const authRoutes = require('../routes/api/auth');
 const contentRoutes = require('../routes/api/content');
 
 // Use Routes
+// Route to test if heroku deploy works
+app.get('/', (req, res) => {
+    res.send('Hello from Heroku...')
+});
 app.use('/api/auth', authRoutes);
 app.use('/api/justify', contentRoutes);
 
