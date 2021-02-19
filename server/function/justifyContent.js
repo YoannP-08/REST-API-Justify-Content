@@ -14,10 +14,17 @@ function justifyContent(text) {
             let tmpTxt = text.slice(0, 80);
             text = text.slice(80);
 
-            if (tmpTxt.startsWith(' ') || tmpTxt.endsWith(' ')) {            
+            if (tmpTxt.startsWith(' ') || tmpTxt.endsWith(' ')) {        
                 const missingChar = tmpTxt.length - tmpTxt.trim().length;
-                newText += tmpTxt.trim() + ' ' + text.slice(0, (missingChar - 1)) + '\n';
-                text = text.slice(missingChar - 1);
+                if (missingChar === 2) {
+                    newText += tmpTxt.trim() + ' ' + text.slice(0, 1) + '\n';
+                    text = text.slice(1);
+                };
+                if (missingChar === 1) {
+                    let tmpArr = tmpTxt.trim().split(' ');
+                    tmpArr[0] += ' ';
+                    newText += tmpArr.join(' ') + '\n';
+                };
             } else {
                 newText += tmpTxt + '\n';
             };
