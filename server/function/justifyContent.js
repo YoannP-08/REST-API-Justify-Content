@@ -1,5 +1,5 @@
 function justifyContent(text) {
-    const nbrRound = Math.round(text.length / 80);
+    const nbrRound = Math.ceil(text.length / 80);
     let newText = '';
 
     // Removing extra whitespace
@@ -15,8 +15,10 @@ function justifyContent(text) {
             text = text.slice(80);
 
             if (tmpTxt.startsWith(' ') || tmpTxt.endsWith(' ')) {            
-                newText += tmpTxt.trim() + ' ' + text.slice(0, 1) + '\n';
+                const missingChar = tmpTxt.length - tmpTxt.trim().length;
+                newText += tmpTxt.trim() + ' ' + text.slice(0, (missingChar - 1)) + '\n';
                 text = text.slice(1)
+                text = text.slice(missingChar - 1);
             } else {
                 newText += tmpTxt + '\n';
             };
