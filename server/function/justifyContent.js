@@ -17,7 +17,6 @@ function justifyContent(text) {
             if (tmpTxt.startsWith(' ') || tmpTxt.endsWith(' ')) {            
                 const missingChar = tmpTxt.length - tmpTxt.trim().length;
                 newText += tmpTxt.trim() + ' ' + text.slice(0, (missingChar - 1)) + '\n';
-                text = text.slice(1)
                 text = text.slice(missingChar - 1);
             } else {
                 newText += tmpTxt + '\n';
