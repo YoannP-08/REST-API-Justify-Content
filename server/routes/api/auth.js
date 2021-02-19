@@ -49,7 +49,7 @@ router.post('/signup', async (req, res) => {
         const savedUser = await newUser.save();
 
         // Creating unique token - 24hours
-        const token = jwt.sign(
+        const token = await jwt.sign(
             {id: savedUser.id},
             process.env.JWT_SECRET,
             { expiresIn: 86400 }
@@ -102,7 +102,7 @@ router.post('/signin', async (req, res) => {
             };
     
             // Creating & sending unique token - 24hours
-            const token = jwt.sign(
+            const token = await jwt.sign(
                 { id: user.id }, 
                 process.env.JWT_SECRET, 
                 { expiresIn: 86400}

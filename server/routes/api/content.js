@@ -33,7 +33,7 @@ router.post('/', auth, async (req, res) => {
     // };
 
     const token = req.header('token');
-    const tokenDecoded = jwt.verify(token, process.env.JWT_SECRET);
+    const tokenDecoded = await jwt.verify(token, process.env.JWT_SECRET);
 
     let user = await User.findOne({ _id: tokenDecoded.id});
 
