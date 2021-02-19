@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const auth = require('../../middleware/authentication');
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
+const justifyContent = require('../../function/justifyContent'); 
 
 // Import Content Model
 const Content = require('../../models/Content');
@@ -31,7 +32,7 @@ router.post('/', auth, async (req, res) => {
     //     return res.status(400).json({ success: false, msg: 'User Id missing.'})
     // };
 
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.header('token');
     const tokenDecoded = jwt.verify(token, process.env.JWT_SECRET);
 
     let user = await User.findOne({ _id: tokenDecoded.id});
@@ -42,7 +43,7 @@ router.post('/', auth, async (req, res) => {
     if (80000 < user.counter) {
         return res.status(402).json({ success: false, msg: 'Payment Required.'});
     } else if (80000 < newCount) {
-        return res.status(402).json({ sucess: false, msg: `No sufficient free credits, free credits left ${80000 - user.counter}. Current request is of ${nbrWords}`});
+        return res.status(402).json({ success: false, msg: `No sufficient free credits, free credits left ${80000 - user.counter} words. Current request is of ${nbrWords} words`});
     };
 
     await User.findByIdAndUpdate({ _id: tokenDecoded.id }, { counter: newCount }, { new: true, useFindAndModify: false });
@@ -57,7 +58,7 @@ router.post('/', auth, async (req, res) => {
 
         if (!savedContent) throw Error('Something went wrong while saving the content.');
 
-        res.set('Content-Type', 'text/plain').status(200).send(text)
+        res.set('Content-Type', 'text/plain').status(200).send(justifyContent(text))
 
     } catch (err) {
         return res.status(400).json({ success: false, msg: err});
