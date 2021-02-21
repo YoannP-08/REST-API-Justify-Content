@@ -97,8 +97,19 @@ describe('RESTFUL API Jusitify Content Test', () => {
                 .send(text)
                 .end((err, res) => {
                     res.should.have.status(200);
+                    res.text.should.be.eql(
+                        'It is a long established fact that a reader will be distracted by the readable c' + '\n' +
+                        'ontent of a page when looking at its layout. The point of using Lorem Ipsum is t' + '\n' +
+                        "hat it has a more-or-less normal distribution of letters, as opposed to using 'C" + '\n' +
+                        "ontent here, content here', making it look like readable English. Many desktop p" + '\n' +
+                        'ublishing packages and web page editors now use Lorem Ipsum as their default mod' + '\n' +
+                        "el text, and a search for 'lorem ipsum' will uncover many web sites still in the" + '\n' +
+                        'ir infancy. Various versions have evolved over the years, sometimes by accident,' + '\n' +
+                        'sometimes on purpose (injected humour and the like).'
+                    )
                     done();
                 });
         });
     });
 });
+
